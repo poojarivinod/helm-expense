@@ -1,0 +1,11 @@
+# copy from k8-expense-volume/backend/manifest.yaml
+# copy from 08-config-map.yaml and make some changes
+# we have DB_HOST in image, we can overwrite environment varible(DB_HOST) at runtime through configmap 
+# If we keep the DB_HOST in image,if anychange in DB-HOST then we need to rebuild the image
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: backend
+  namespace: expense
+data:
+  DB_HOST: mysql

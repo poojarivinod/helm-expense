@@ -1,0 +1,31 @@
+# copy from k8-expense-volume/backend/manifest.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: expense
+  # labels of deployment resource
+  labels:
+    app: backend
+    tier: backend
+    project: expense
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+      tier: backend
+      project: expense
+  template:
+    metadata:
+      labels:
+        app: backend
+        tier: backend
+        project: expense
+    spec:
+      containers:
+      - name: nginx
+        image: poojarivinod1/backend:{{ .Values.deployment.version }}
+        envFrom: # copy from the 11-pod-config.yaml
+        - configMapRef:
+            name: backend 
